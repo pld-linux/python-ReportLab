@@ -1,5 +1,5 @@
-%define		module	ReportLab
 %include	/usr/lib/rpm/macros.python
+%define		module	ReportLab
 Summary:	Python library for generating PDFs and graphics
 Summary(pl):	Modu³y Pythona do generowania PDFów oraz grafik
 Name:		python-%{module}
@@ -14,12 +14,12 @@ Group(pl):	Programowanie/Jêzyki/Python
 Group(pt):	Desenvolvimento/Línguas/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_1_11.tgz
 URL:		http://www.reportlab.com/
+BuildRequires:	python-devel >= 2.2
+BuildRequires:	rpm-pythonprov
 %requires_eq	python
 Requires:	python-Imaging
-BuildRequires:	python-devel >= 1.5
-BuildRequires:	rpm-pythonprov
-Obsoletes:	%{module}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	%{module}
 
 %description
 A library written in python that lets you generate platform
@@ -34,12 +34,12 @@ independant PDFs and graphics.
 %description -l pl
 Biblioteka napisana w pythonie pozwalaj±ca na generowanie niezale¿nych
 od platformy PDF-ów oraz grafik.
-- Generowanie PDF: U¿ywa Pythona, przejrzystego jêzyka obiektowego
-  o warstwowej architekturze
+- Generowanie PDF: U¿ywa Pythona, przejrzystego jêzyka obiektowego o
+  warstwowej architekturze
 - Grafika: podstawowe figury geometryczne, kontrolki, a tak¿e
   przyk³ady, w³±czaj±c w to wykresy i diagramy
-- PythonPoing: Narzêdzie do generowania slajdów w formacie PDF
-  z prostego formatu XML
+- PythonPoing: Narzêdzie do generowania slajdów w formacie PDF z
+  prostego formatu XML
 
 %prep
 %setup -q -n reportlab
