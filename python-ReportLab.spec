@@ -42,7 +42,8 @@ od platformy PDF-ów oraz grafik.
 
 %build
 cd reportlab
-%{__make} -C lib -f Makefile.pre.in boot
+%{__make} -C lib -f Makefile.pre.in boot \
+	LIBP="%{py_libdir}"
 perl -pi -e "s|\@DEFS\@||" lib/Makefile
 %{__make} -C lib \
 	OPT="%{rpmcflags}" \
