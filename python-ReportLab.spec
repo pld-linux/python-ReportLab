@@ -8,6 +8,7 @@ Release:	1
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_%(echo %{version} | sed 's/\./_/').tgz
+# Source0-md5:	15a53dcad45bbbdf125c8ff64e535f36
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 2.2.1
 BuildRequires:	rpm-pythonprov
