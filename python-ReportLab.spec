@@ -11,7 +11,7 @@ Source0:	http://www.reportlab.com/ftp/ReportLab_%(echo %{version} | sed 's/\./_/
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
-%requires_eq	python
+%pyrequires_eq	python
 Requires:	python-Imaging
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	%{module}
