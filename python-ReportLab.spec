@@ -8,7 +8,7 @@ Release:	0.1
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_%(echo %{version} | tr . _).tgz
-# Source0-md5:	15a53dcad45bbbdf125c8ff64e535f36
+# Source0-md5:	742dcc46702cb547264803303ffae2aa
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 2.3
 BuildRequires:	rpm-pythonprov
@@ -52,7 +52,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -rf test
 cp -aR * $RPM_BUILD_ROOT%{py_sitedir}/%{module}
-mv demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+rm -rf $RPM_BUILD_ROOT%{py_sitedir}/%{module}/{demos,docs}
+cp -a demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 echo "%{module}" > $RPM_BUILD_ROOT%{py_sitedir}/reportlab.pth
 ln -s %{module} $RPM_BUILD_ROOT%{py_sitedir}/reportlab
@@ -110,3 +111,9 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/%{module}/tools/pythonpoint/*.dtd
 %dir %{py_sitedir}/%{module}/tools/pythonpoint/styles
 %{py_sitedir}/%{module}/tools/pythonpoint/styles/*.py[co]
+# to -demos subpackage ?
+%dir %{py_sitedir}/%{module}/graphics/samples
+%{py_sitedir}/%{module}/graphics/samples/*.py[co]
+# *.py as %doc for education
+%doc %{py_sitedir}/%{module}/graphics/samples/*.py
+%{py_sitedir}/%{module}/tools/pythonpoint/demos
