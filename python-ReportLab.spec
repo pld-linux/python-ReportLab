@@ -4,14 +4,13 @@ Summary:	Python library for generating PDFs and graphics
 Summary(pl):	Modu³y Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 Version:	1.19
-Release:	3
+Release:	4
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
 # Source0-md5:	02eeec6481f71918bf469a78edc4437c
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 1:2.3
-BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python
 Requires:	python-Imaging
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
