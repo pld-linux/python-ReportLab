@@ -3,8 +3,8 @@
 Summary:	Python library for generating PDFs and graphics
 Summary(pl):	Modu³y Pythona do generowania PDFów oraz grafik
 Name:		python-%{module}
-Version:	1.13
-Release:	3
+Version:	1.14
+Release:	1
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_%(echo %{version} | sed 's/\./_/').tgz
@@ -79,6 +79,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/%{module}/fonts
 %{py_sitedir}/%{module}/fonts/*.AFM
 %{py_sitedir}/%{module}/fonts/*.PFB
+%{py_sitedir}/%{module}/fonts/*.ttf
+%{py_sitedir}/%{module}/fonts/*.txt
 %dir %{py_sitedir}/%{module}/graphics
 %{py_sitedir}/%{module}/graphics/*.py[co]
 %dir %{py_sitedir}/%{module}/graphics/charts
@@ -100,7 +102,10 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/%{module}/tools/docco/*.py[co]
 %dir %{py_sitedir}/%{module}/tools/py2pdf
 %{py_sitedir}/%{module}/tools/py2pdf/*.py[co]
+%{py_sitedir}/%{module}/tools/py2pdf/*.jpg
+%{py_sitedir}/%{module}/tools/py2pdf/*.txt
 %dir %{py_sitedir}/%{module}/tools/pythonpoint
 %{py_sitedir}/%{module}/tools/pythonpoint/*.py[co]
+%{py_sitedir}/%{module}/tools/pythonpoint/*.dtd
 %dir %{py_sitedir}/%{module}/tools/pythonpoint/styles
 %{py_sitedir}/%{module}/tools/pythonpoint/styles/*.py[co]
