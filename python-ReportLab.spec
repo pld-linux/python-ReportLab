@@ -54,7 +54,7 @@ cp -aR * $RPM_BUILD_ROOT%{py_sitedir}/%{module}
 mv demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 echo "%{module}" > $RPM_BUILD_ROOT%{py_sitedir}/reportlab.pth
-ln -s %{module} $RPM_BUILD_ROOT%{py_sitedir}/reportlab 
+ln -s %{module} $RPM_BUILD_ROOT%{py_sitedir}/reportlab
 
 install tools/py2pdf/py2pdf.py $RPM_BUILD_ROOT%{_bindir}
 install tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
