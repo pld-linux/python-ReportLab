@@ -37,7 +37,7 @@ od platformy PDF-ów oraz grafik.
 - Generowanie PDF: U¿ywa Pythona, przejrzystego jêzyka obiektowego
   o warstwowej architekturze
 - Grafika: podstawowe figury geometryczne, kontrolki, a tak¿e
-  przyk³ady, w³aczaj±c w to wykresy i diagramy
+  przyk³ady, w³±czaj±c w to wykresy i diagramy
 - PythonPoing: Narzêdzie do generowania slajdów w formacie PDF
   z prostego formatu XML
 
