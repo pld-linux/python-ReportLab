@@ -33,13 +33,13 @@ independant PDFs and graphics.
 
 %description -l pl
 Biblioteka napisana w pythonie pozwalaj±ca na generowanie niezale¿nych
-od platformy PDFów oraz grafik.
-- Generowanie PDF: U¿ywa Pythona, przejrzystego jêzyka OO, o
-  warstwowej architektórze
-- Grafika: dostarcza cienie, u¿yteczne widgety, proste zbiory
-  w³aczaj±c w to biznesowe wykresy i diagramy
-- PythonPoing: Narzêdzie do generowania slajd w PDF z prostego formatu
-  XML
+od platformy PDF-ów oraz grafik.
+- Generowanie PDF: U¿ywa Pythona, przejrzystego jêzyka obiektowego
+  o warstwowej architekturze
+- Grafika: podstawowe figury geometryczne, kontrolki, a tak¿e
+  przyk³ady, w³aczaj±c w to wykresy i diagramy
+- PythonPoing: Narzêdzie do generowania slajdów w formacie PDF
+  z prostego formatu XML
 
 %prep
 %setup -q -n reportlab
@@ -52,9 +52,11 @@ od platformy PDFów oraz grafik.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 install -d $RPM_BUILD_ROOT%{py_sitedir}/%{module}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -rf test
 cp -aR * $RPM_BUILD_ROOT%{py_sitedir}/%{module}
+mv demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 echo "%{module}" > $RPM_BUILD_ROOT%{py_sitedir}/reportlab.pth
 ln -s %{module} $RPM_BUILD_ROOT%{py_sitedir}/reportlab 
@@ -72,7 +74,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/* demos license*
+%doc docs/* license*
+%{_examplesdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %{py_sitedir}/*.pth
 %dir %{py_sitedir}/reportlab
