@@ -7,7 +7,7 @@ Version:	1.13
 Release:	1
 License:	distributable
 Group:		Libraries/Python
-Source0:	http://www.reportlab.com/ftp/ReportLab_1_11.tgz
+Source0:	http://www.reportlab.com/ftp/ReportLab_%(echo %{version} | sed 's/\./_/').tgz
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	rpm-pythonprov
