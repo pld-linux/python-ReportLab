@@ -44,7 +44,10 @@ od platformy PDF-ów oraz grafik.
 cd reportlab
 %{__make} -C lib -f Makefile.pre.in boot
 perl -pi -e "s|\@DEFS\@||" lib/Makefile
-%{__make} -C lib OPT="%{rpmcflags}" CC="%{__cc}"
+%{__make} -C lib \
+	OPT="%{rpmcflags}" \
+	CC="%{__cc}" \
+	LIBP="%{py_libdir}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
