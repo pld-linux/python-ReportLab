@@ -7,11 +7,6 @@ Version:	1.11
 Release:	1
 License:	distributable
 Group:		Development/Languages/Python
-Group(de):	Entwicklung/Sprachen/Python
-Group(es):	Desarrollo/Lenguages/Python
-Group(fr):	Development/Langues/Python
-Group(pl):	Programowanie/Jêzyki/Python
-Group(pt):	Desenvolvimento/Línguas/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_1_11.tgz
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 2.2
