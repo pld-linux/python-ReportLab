@@ -1,13 +1,14 @@
 %define		module	ReportLab
+%define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
 Summary(pl):	Modu³y Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	1.18
+Version:	1.19
 Release:	1
 License:	distributable
 Group:		Libraries/Python
-Source0:	http://www.reportlab.com/ftp/ReportLab_%(echo %{version} | tr . _).tgz
-# Source0-md5:	742dcc46702cb547264803303ffae2aa
+Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
+# Source0-md5:	02eeec6481f71918bf469a78edc4437c
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 2.3
 BuildRequires:	rpm-pythonprov
@@ -37,14 +38,17 @@ od platformy PDF-ów oraz grafik.
   prostego formatu XML
 
 %prep
-%setup -q -n reportlab
+%setup -q -n reportlab-%{fversion}
 
 %build
+cd reportlab
 %{__make} -C lib -f Makefile.pre.in boot
+perl -pi -e "s|\@DEFS\@||" lib/Makefile
 %{__make} -C lib OPT="%{rpmcflags}" CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
+cd reportlab
 install -d $RPM_BUILD_ROOT%{_bindir}
 install -d $RPM_BUILD_ROOT%{py_sitedir}/%{module}
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -68,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/* license*
+%doc reportlab/docs/* reportlab/license*
 %{_examplesdir}/%{name}-%{version}
 %attr(755,root,root) %{_bindir}/*
 %{py_sitedir}/*.pth
