@@ -10,7 +10,7 @@ Group:		Libraries/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
 # Source0-md5:	02eeec6481f71918bf469a78edc4437c
 URL:		http://www.reportlab.com/
-BuildRequires:	python-devel >= 2.3
+BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python
 Requires:	python-Imaging
