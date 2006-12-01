@@ -12,7 +12,7 @@ Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 1:2.3
 %pyrequires_eq	python
-Requires:	python-Imaging
+Requires:	python-PIL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	%{module}
 
