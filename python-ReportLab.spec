@@ -1,14 +1,15 @@
 %define		module	ReportLab
+%define		_module reportlab
 %define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
 Summary(pl):	Modu³y Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	1.19
-Release:	4
+Version:	1.21
+Release:	1
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
-# Source0-md5:	02eeec6481f71918bf469a78edc4437c
+# Source0-md5:	5bc101ff85e56096ea9584c0117a27a8
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 1:2.3
 %pyrequires_eq	python
@@ -36,90 +37,97 @@ od platformy PDF-ów oraz grafik.
 - PythonPoing: narzêdzie do generowania slajdów w formacie PDF z
   prostego formatu XML
 
+%package examples
+Summary:	Examples of ReportLab
+Summary(pl):	Przyk³ady do ReportLab
+Group:		Libraries/Python
+%pyrequires_eq  python
+Requires:       %{name} = %{version}-%{release}
+
+%description examples
+Examples of ReportLab
+
+%description examples -l pl
+Przyk³ady do biblioteki ReportLab
+
 %prep
-%setup -q -n reportlab-%{fversion}
+%setup -q -n reportlab_%{fversion}
 
 %build
 cd reportlab
-%{__make} -C lib -f Makefile.pre.in boot \
-	LIBP="%{py_libdir}"
-perl -pi -e "s|\@DEFS\@||" lib/Makefile
-%{__make} -C lib \
-	OPT="%{rpmcflags}" \
-	CC="%{__cc}" \
-	LIBP="%{py_libdir}"
+CFLAGS="%{rpmcflags}"; export CFLAGS
+python setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 cd reportlab
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -d $RPM_BUILD_ROOT%{py_sitedir}/%{module}
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+python setup.py install \
+    --root=$RPM_BUILD_ROOT \
+    --optimize=2
 
-rm -rf test
-cp -aR * $RPM_BUILD_ROOT%{py_sitedir}/%{module}
-rm -rf $RPM_BUILD_ROOT%{py_sitedir}/%{module}/{demos,docs}
-cp -a demos/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-
-echo "%{module}" > $RPM_BUILD_ROOT%{py_sitedir}/reportlab.pth
-ln -s %{module} $RPM_BUILD_ROOT%{py_sitedir}/reportlab
-
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}}
 install tools/py2pdf/py2pdf.py $RPM_BUILD_ROOT%{_bindir}
 install tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
 
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+mv demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+mv graphics/samples $RPM_BUILD_ROOT%{_examplesdir}/%{name}/graphics-samples
+mv tools/pythonpoint/demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}/pythonpoint-demos
+
+%py_postclean $RPM_BUILD_ROOT%{py_sitescriptdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc reportlab/docs/* reportlab/license*
-%{_examplesdir}/%{name}-%{version}
+%doc reportlab/README reportlab/docs/*.pdf reportlab/license*
 %attr(755,root,root) %{_bindir}/*
-%{py_sitedir}/*.pth
-%dir %{py_sitedir}/reportlab
-%dir %{py_sitedir}/%{module}
-%{py_sitedir}/%{module}/*.py[co]
-%dir %{py_sitedir}/%{module}/extensions
-%{py_sitedir}/%{module}/extensions/*.py[co]
-%dir %{py_sitedir}/%{module}/fonts
-%{py_sitedir}/%{module}/fonts/*.AFM
-%{py_sitedir}/%{module}/fonts/*.PFB
-%{py_sitedir}/%{module}/fonts/*.ttf
-%{py_sitedir}/%{module}/fonts/*.txt
-%dir %{py_sitedir}/%{module}/graphics
-%{py_sitedir}/%{module}/graphics/*.py[co]
-%dir %{py_sitedir}/%{module}/graphics/charts
-%{py_sitedir}/%{module}/graphics/charts/*.py[co]
-%dir %{py_sitedir}/%{module}/graphics/widgets
-%{py_sitedir}/%{module}/graphics/widgets/*.py[co]
-%dir %{py_sitedir}/%{module}/lib
-%{py_sitedir}/%{module}/lib/*.py[co]
-%attr(755,root,root) %{py_sitedir}/%{module}/lib/*.so
-%dir %{py_sitedir}/%{module}/pdfbase
-%{py_sitedir}/%{module}/pdfbase/*.py[co]
-%dir %{py_sitedir}/%{module}/pdfgen
-%{py_sitedir}/%{module}/pdfgen/*.py[co]
-%dir %{py_sitedir}/%{module}/platypus
-%{py_sitedir}/%{module}/platypus/*.py[co]
-%dir %{py_sitedir}/%{module}/tools
-%{py_sitedir}/%{module}/tools/*.py[co]
-%dir %{py_sitedir}/%{module}/tools/docco
-%{py_sitedir}/%{module}/tools/docco/*.py[co]
-%dir %{py_sitedir}/%{module}/tools/py2pdf
-%{py_sitedir}/%{module}/tools/py2pdf/*.py[co]
-%{py_sitedir}/%{module}/tools/py2pdf/*.jpg
-%{py_sitedir}/%{module}/tools/py2pdf/*.txt
-%dir %{py_sitedir}/%{module}/tools/pythonpoint
-%{py_sitedir}/%{module}/tools/pythonpoint/*.py[co]
-%{py_sitedir}/%{module}/tools/pythonpoint/*.dtd
-%dir %{py_sitedir}/%{module}/tools/pythonpoint/styles
-%{py_sitedir}/%{module}/tools/pythonpoint/styles/*.py[co]
-# to -demos subpackage ?
-%dir %{py_sitedir}/%{module}/graphics/samples
-%{py_sitedir}/%{module}/graphics/samples/*.py[co]
-# *.py as %doc for education
-%doc %{py_sitedir}/%{module}/graphics/samples/*.py
-%{py_sitedir}/%{module}/tools/pythonpoint/demos
+%dir %{py_sitescriptdir}/%{_module}
+%{py_sitescriptdir}/%{_module}/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/extensions
+%{py_sitescriptdir}/%{_module}/extensions/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/fonts
+%{py_sitescriptdir}/%{_module}/fonts/*.AFM
+%{py_sitescriptdir}/%{_module}/fonts/*.PFB
+%{py_sitescriptdir}/%{_module}/fonts/*.ttf
+%{py_sitescriptdir}/%{_module}/fonts/*.txt
+%dir %{py_sitescriptdir}/%{_module}/graphics
+%{py_sitescriptdir}/%{_module}/graphics/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/graphics/charts
+%{py_sitescriptdir}/%{_module}/graphics/charts/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/graphics/widgets
+%{py_sitescriptdir}/%{_module}/graphics/widgets/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/lib
+%{py_sitescriptdir}/%{_module}/lib/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/pdfbase
+%{py_sitescriptdir}/%{_module}/pdfbase/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/pdfgen
+%{py_sitescriptdir}/%{_module}/pdfgen/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/platypus
+%{py_sitescriptdir}/%{_module}/platypus/*.py[co]
+%dir %{py_sitescriptdir}/%{_module}/tools
+%{py_sitescriptdir}/%{_module}/tools/*.py[co]
+%{py_sitescriptdir}/%{_module}/tools/README
+%dir %{py_sitescriptdir}/%{_module}/tools/docco
+%{py_sitescriptdir}/%{_module}/tools/docco/*.py[co]
+%{py_sitescriptdir}/%{_module}/tools/docco/README
+%dir %{py_sitescriptdir}/%{_module}/tools/py2pdf
+%{py_sitescriptdir}/%{_module}/tools/py2pdf/*.py[co]
+%{py_sitescriptdir}/%{_module}/tools/py2pdf/*.jpg
+%{py_sitescriptdir}/%{_module}/tools/py2pdf/*.txt
+%{py_sitescriptdir}/%{_module}/tools/py2pdf/README
+%dir %{py_sitescriptdir}/%{_module}/tools/pythonpoint
+%{py_sitescriptdir}/%{_module}/tools/pythonpoint/*.py[co]
+%{py_sitescriptdir}/%{_module}/tools/pythonpoint/README
+%{py_sitescriptdir}/%{_module}/tools/pythonpoint/*.dtd
+%dir %{py_sitescriptdir}/%{_module}/tools/pythonpoint/styles
+%{py_sitescriptdir}/%{_module}/tools/pythonpoint/styles/*.py[co]
+
+%files examples
+%defattr(644,root,root,755)
+%dir %{_examplesdir}/%{name}/demos
+%dir %{_examplesdir}/%{name}/graphics-samples
+%dir %{_examplesdir}/%{name}/pythonpoint-demos
+%{_examplesdir}/%{name}/graphics-samples/*.py
+%{_examplesdir}/%{name}/demos
+%{_examplesdir}/%{name}/pythonpoint-demos
