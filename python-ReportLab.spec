@@ -38,17 +38,17 @@ od platformy PDF-ów oraz grafik.
   prostego formatu XML
 
 %package examples
-Summary:	Examples of ReportLab
-Summary(pl):	Przyk³ady do ReportLab
+Summary:	Examples for ReportLab
+Summary(pl):	Przyk³ady do biblioteki ReportLab
 Group:		Libraries/Python
-%pyrequires_eq  python
-Requires:       %{name} = %{version}-%{release}
+%pyrequires_eq	python
+Requires:	%{name} = %{version}-%{release}
 
 %description examples
-Examples of ReportLab
+Examples for ReportLab.
 
 %description examples -l pl
-Przyk³ady do biblioteki ReportLab
+Przyk³ady do biblioteki ReportLab.
 
 %prep
 %setup -q -n reportlab_%{fversion}
@@ -62,16 +62,16 @@ python setup.py build
 rm -rf $RPM_BUILD_ROOT
 cd reportlab
 python setup.py install \
-    --root=$RPM_BUILD_ROOT \
-    --optimize=2
+	--root=$RPM_BUILD_ROOT \
+	--optimize=2
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}-%{version}}
 install tools/py2pdf/py2pdf.py $RPM_BUILD_ROOT%{_bindir}
 install tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
 
-mv demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}
-mv graphics/samples $RPM_BUILD_ROOT%{_examplesdir}/%{name}/graphics-samples
-mv tools/pythonpoint/demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}/pythonpoint-demos
+cp -a demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a graphics/samples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/graphics-samples
+cp -a tools/pythonpoint/demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/pythonpoint-demos
 
 %py_postclean $RPM_BUILD_ROOT%{py_sitescriptdir}
 
@@ -125,9 +125,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files examples
 %defattr(644,root,root,755)
-%dir %{_examplesdir}/%{name}/demos
-%dir %{_examplesdir}/%{name}/graphics-samples
-%dir %{_examplesdir}/%{name}/pythonpoint-demos
-%{_examplesdir}/%{name}/graphics-samples/*.py
-%{_examplesdir}/%{name}/demos
-%{_examplesdir}/%{name}/pythonpoint-demos
+%dir %{_examplesdir}/%{name}-%{version}
+%dir %{_examplesdir}/%{name}-%{version}/graphics-samples
+%{_examplesdir}/%{name}-%{version}/graphics-samples/*.py
+%{_examplesdir}/%{name}-%{version}/demos
+%{_examplesdir}/%{name}-%{version}/pythonpoint-demos
