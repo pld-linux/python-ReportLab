@@ -1,5 +1,4 @@
 %define		module	ReportLab
-%define		_module reportlab
 %define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
 Summary(pl):	Modu³y Pythona do generowania PDF-ów oraz grafik
@@ -14,8 +13,8 @@ URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 1:2.3
 %pyrequires_eq	python
 Requires:	python-PIL
+Obsoletes:	ReportLab
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Obsoletes:	%{module}
 
 %description
 A library written in Python that lets you generate platform
@@ -82,46 +81,46 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc reportlab/README reportlab/docs/*.pdf reportlab/license*
 %attr(755,root,root) %{_bindir}/*
-%dir %{py_sitescriptdir}/%{_module}
-%{py_sitescriptdir}/%{_module}/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/extensions
-%{py_sitescriptdir}/%{_module}/extensions/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/fonts
-%{py_sitescriptdir}/%{_module}/fonts/*.AFM
-%{py_sitescriptdir}/%{_module}/fonts/*.PFB
-%{py_sitescriptdir}/%{_module}/fonts/*.ttf
-%{py_sitescriptdir}/%{_module}/fonts/*.txt
-%dir %{py_sitescriptdir}/%{_module}/graphics
-%{py_sitescriptdir}/%{_module}/graphics/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/graphics/charts
-%{py_sitescriptdir}/%{_module}/graphics/charts/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/graphics/widgets
-%{py_sitescriptdir}/%{_module}/graphics/widgets/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/lib
-%{py_sitescriptdir}/%{_module}/lib/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/pdfbase
-%{py_sitescriptdir}/%{_module}/pdfbase/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/pdfgen
-%{py_sitescriptdir}/%{_module}/pdfgen/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/platypus
-%{py_sitescriptdir}/%{_module}/platypus/*.py[co]
-%dir %{py_sitescriptdir}/%{_module}/tools
-%{py_sitescriptdir}/%{_module}/tools/*.py[co]
-%{py_sitescriptdir}/%{_module}/tools/README
-%dir %{py_sitescriptdir}/%{_module}/tools/docco
-%{py_sitescriptdir}/%{_module}/tools/docco/*.py[co]
-%{py_sitescriptdir}/%{_module}/tools/docco/README
-%dir %{py_sitescriptdir}/%{_module}/tools/py2pdf
-%{py_sitescriptdir}/%{_module}/tools/py2pdf/*.py[co]
-%{py_sitescriptdir}/%{_module}/tools/py2pdf/*.jpg
-%{py_sitescriptdir}/%{_module}/tools/py2pdf/*.txt
-%{py_sitescriptdir}/%{_module}/tools/py2pdf/README
-%dir %{py_sitescriptdir}/%{_module}/tools/pythonpoint
-%{py_sitescriptdir}/%{_module}/tools/pythonpoint/*.py[co]
-%{py_sitescriptdir}/%{_module}/tools/pythonpoint/README
-%{py_sitescriptdir}/%{_module}/tools/pythonpoint/*.dtd
-%dir %{py_sitescriptdir}/%{_module}/tools/pythonpoint/styles
-%{py_sitescriptdir}/%{_module}/tools/pythonpoint/styles/*.py[co]
+%dir %{py_sitescriptdir}/reportlab
+%{py_sitescriptdir}/reportlab/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/extensions
+%{py_sitescriptdir}/reportlab/extensions/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/fonts
+%{py_sitescriptdir}/reportlab/fonts/*.AFM
+%{py_sitescriptdir}/reportlab/fonts/*.PFB
+%{py_sitescriptdir}/reportlab/fonts/*.ttf
+%{py_sitescriptdir}/reportlab/fonts/*.txt
+%dir %{py_sitescriptdir}/reportlab/graphics
+%{py_sitescriptdir}/reportlab/graphics/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/graphics/charts
+%{py_sitescriptdir}/reportlab/graphics/charts/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/graphics/widgets
+%{py_sitescriptdir}/reportlab/graphics/widgets/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/lib
+%{py_sitescriptdir}/reportlab/lib/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/pdfbase
+%{py_sitescriptdir}/reportlab/pdfbase/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/pdfgen
+%{py_sitescriptdir}/reportlab/pdfgen/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/platypus
+%{py_sitescriptdir}/reportlab/platypus/*.py[co]
+%dir %{py_sitescriptdir}/reportlab/tools
+%{py_sitescriptdir}/reportlab/tools/*.py[co]
+%{py_sitescriptdir}/reportlab/tools/README
+%dir %{py_sitescriptdir}/reportlab/tools/docco
+%{py_sitescriptdir}/reportlab/tools/docco/*.py[co]
+%{py_sitescriptdir}/reportlab/tools/docco/README
+%dir %{py_sitescriptdir}/reportlab/tools/py2pdf
+%{py_sitescriptdir}/reportlab/tools/py2pdf/*.py[co]
+%{py_sitescriptdir}/reportlab/tools/py2pdf/*.jpg
+%{py_sitescriptdir}/reportlab/tools/py2pdf/*.txt
+%{py_sitescriptdir}/reportlab/tools/py2pdf/README
+%dir %{py_sitescriptdir}/reportlab/tools/pythonpoint
+%{py_sitescriptdir}/reportlab/tools/pythonpoint/*.py[co]
+%{py_sitescriptdir}/reportlab/tools/pythonpoint/README
+%{py_sitescriptdir}/reportlab/tools/pythonpoint/*.dtd
+%dir %{py_sitescriptdir}/reportlab/tools/pythonpoint/styles
+%{py_sitescriptdir}/reportlab/tools/pythonpoint/styles/*.py[co]
 
 %files examples
 %defattr(644,root,root,755)
