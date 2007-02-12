@@ -1,7 +1,7 @@
 %define		module	ReportLab
 %define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
-Summary(pl):	Modu³y Pythona do generowania PDF-ów oraz grafik
+Summary(pl.UTF-8):   ModuÅ‚y Pythona do generowania PDF-Ã³w oraz grafik
 Name:		python-%{module}
 Version:	1.21
 Release:	1
@@ -26,19 +26,19 @@ independant PDFs and graphics.
 - PythonPoint: a utility for generating PDF slides from a simple XML
   format
 
-%description -l pl
-Biblioteka napisana w Pythonie pozwalaj±ca na generowanie niezale¿nych
-od platformy PDF-ów oraz grafik.
-- Generowanie PDF: u¿ywa Pythona, przejrzystego jêzyka obiektowego o
+%description -l pl.UTF-8
+Biblioteka napisana w Pythonie pozwalajÄ…ca na generowanie niezaleÅ¼nych
+od platformy PDF-Ã³w oraz grafik.
+- Generowanie PDF: uÅ¼ywa Pythona, przejrzystego jÄ™zyka obiektowego o
   warstwowej architekturze
-- Grafika: podstawowe figury geometryczne, kontrolki, a tak¿e
-  przyk³ady, w³±czaj±c w to wykresy i diagramy
-- PythonPoing: narzêdzie do generowania slajdów w formacie PDF z
+- Grafika: podstawowe figury geometryczne, kontrolki, a takÅ¼e
+  przykÅ‚ady, wÅ‚Ä…czajÄ…c w to wykresy i diagramy
+- PythonPoing: narzÄ™dzie do generowania slajdÃ³w w formacie PDF z
   prostego formatu XML
 
 %package examples
 Summary:	Examples for ReportLab
-Summary(pl):	Przyk³ady do biblioteki ReportLab
+Summary(pl.UTF-8):   PrzykÅ‚ady do biblioteki ReportLab
 Group:		Libraries/Python
 %pyrequires_eq	python
 Requires:	%{name} = %{version}-%{release}
@@ -46,8 +46,8 @@ Requires:	%{name} = %{version}-%{release}
 %description examples
 Examples for ReportLab.
 
-%description examples -l pl
-Przyk³ady do biblioteki ReportLab.
+%description examples -l pl.UTF-8
+PrzykÅ‚ady do biblioteki ReportLab.
 
 %prep
 %setup -q -n reportlab_%{fversion}
