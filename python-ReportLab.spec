@@ -1,7 +1,7 @@
 %define		module	ReportLab
 %define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
-Summary(pl.UTF-8):   Moduły Pythona do generowania PDF-ów oraz grafik
+Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 Version:	1.21
 Release:	1
@@ -38,7 +38,7 @@ od platformy PDF-ów oraz grafik.
 
 %package examples
 Summary:	Examples for ReportLab
-Summary(pl.UTF-8):   Przykłady do biblioteki ReportLab
+Summary(pl.UTF-8):	Przykłady do biblioteki ReportLab
 Group:		Libraries/Python
 %pyrequires_eq	python
 Requires:	%{name} = %{version}-%{release}
