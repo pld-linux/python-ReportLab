@@ -11,6 +11,8 @@ Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
 # Source0-md5:	d6eefe9e6e06aaa1315462045c9726ba
 URL:		http://www.reportlab.com/
 BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python
 Requires:	python-PIL
 Obsoletes:	ReportLab
@@ -78,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT%{py_sitedir}/reportlab/graphics/samples
 rm -rf $RPM_BUILD_ROOT%{py_sitedir}/reportlab/test
 rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab/tools/pythonpoint/demos
 
-%py_postclean $RPM_BUILD_ROOT%{py_sitedir}
+%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
