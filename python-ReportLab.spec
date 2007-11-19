@@ -59,14 +59,16 @@ Przykłady do biblioteki ReportLab.
 %build
 cd reportlab
 CFLAGS="%{rpmcflags}"; export CFLAGS
-python setup.py build
+python setup.py build \
+	--rl_accel=0
 
 %install
 rm -rf $RPM_BUILD_ROOT
 cd reportlab
 python setup.py install \
 	--root=$RPM_BUILD_ROOT \
-	--optimize=2
+	--optimize=2 \
+	--rl_accel=0
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}-%{version}}
 install tools/py2pdf/py2pdf.py $RPM_BUILD_ROOT%{_bindir}
