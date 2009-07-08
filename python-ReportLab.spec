@@ -3,21 +3,23 @@
 Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	2.1
-Release:	2
+Version:	2.3
+Release:	1
 License:	distributable
 Group:		Libraries/Python
-Source0:	http://www.reportlab.com/ftp/ReportLab_%{fversion}.tgz
-# Source0-md5:	d6eefe9e6e06aaa1315462045c9726ba
+Source0:	http://www.reportlab.org/ftp/ReportLab_%{fversion}.tar.gz
+# Source0-md5:	057b846bd3b7b2c3498bf14f6a523632
 Patch0:		%{name}-setup.patch
-URL:		http://www.reportlab.com/
+URL:		http://www.reportlab.org/
 BuildRequires:	python-devel >= 1:2.5
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python
 Requires:	python-PIL
 Obsoletes:	ReportLab
-BuildArch:	noarch
+Obsoletes:	python-ReportLab-barcode
+Obsoletes:	python-ReportLab-renderPM
+Obsoletes:	python-ReportLab-rl_accel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,36 +56,31 @@ Examples for ReportLab.
 Przykłady do biblioteki ReportLab.
 
 %prep
-%setup -q -n reportlab_%{fversion}
-%patch0 -p1
+%setup -q -n ReportLab_%{fversion}
 
 %build
-cd reportlab
 CFLAGS="%{rpmcflags}"; export CFLAGS
-python setup.py build \
-	--rl_accel=0
+python setup.py build
+cd docs
+PYTHONPATH=../src python genAll.py
+cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd reportlab
 python setup.py install \
 	--root=$RPM_BUILD_ROOT \
-	--optimize=2 \
-	--rl_accel=0
+	--optimize=2
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}-%{version}}
-install tools/py2pdf/py2pdf.py $RPM_BUILD_ROOT%{_bindir}
 install tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
 
 cp -a demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-cp -a graphics/samples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/graphics-samples
 cp -a tools/pythonpoint/demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/pythonpoint-demos
 
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab/demos
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab/docs
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab/graphics/samples
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab/test
-rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab/tools/pythonpoint/demos
+rm -rf $RPM_BUILD_ROOT%{py_sitedir}/reportlab/demos
+rm -rf $RPM_BUILD_ROOT%{py_sitedir}/reportlab/docs
+rm -rf $RPM_BUILD_ROOT%{py_sitedir}/reportlab/graphics/samples
+rm -rf $RPM_BUILD_ROOT%{py_sitedir}/reportlab/test
 
 %py_postclean
 
@@ -92,56 +89,41 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc reportlab/README reportlab/docs/*.pdf reportlab/license*
+%doc README.txt docs/*.pdf LICENSE.txt
 %attr(755,root,root) %{_bindir}/*
-%dir %{py_sitescriptdir}/reportlab
-%{py_sitescriptdir}/Reportlab-%{version}-py*.egg-info
-%{py_sitescriptdir}/reportlab/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/extensions
-%{py_sitescriptdir}/reportlab/extensions/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/fonts
-%{py_sitescriptdir}/reportlab/fonts/*.AFM
-%{py_sitescriptdir}/reportlab/fonts/*.PFB
-%{py_sitescriptdir}/reportlab/fonts/*.ttf
-%{py_sitescriptdir}/reportlab/fonts/*.txt
-%dir %{py_sitescriptdir}/reportlab/graphics
-%{py_sitescriptdir}/reportlab/graphics/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/graphics/charts
-%{py_sitescriptdir}/reportlab/graphics/charts/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/graphics/barcode
-%{py_sitescriptdir}/reportlab/graphics/barcode/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/graphics/widgets
-%{py_sitescriptdir}/reportlab/graphics/widgets/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/lib
-%{py_sitescriptdir}/reportlab/lib/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/pdfbase
-%{py_sitescriptdir}/reportlab/pdfbase/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/pdfgen
-%{py_sitescriptdir}/reportlab/pdfgen/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/platypus
-%{py_sitescriptdir}/reportlab/platypus/*.py[co]
-%dir %{py_sitescriptdir}/reportlab/tools
-%{py_sitescriptdir}/reportlab/tools/*.py[co]
-%{py_sitescriptdir}/reportlab/tools/README
-%dir %{py_sitescriptdir}/reportlab/tools/docco
-%{py_sitescriptdir}/reportlab/tools/docco/*.py[co]
-%{py_sitescriptdir}/reportlab/tools/docco/README
-%dir %{py_sitescriptdir}/reportlab/tools/py2pdf
-%{py_sitescriptdir}/reportlab/tools/py2pdf/*.py[co]
-%{py_sitescriptdir}/reportlab/tools/py2pdf/*.jpg
-%{py_sitescriptdir}/reportlab/tools/py2pdf/*.txt
-%{py_sitescriptdir}/reportlab/tools/py2pdf/README
-%dir %{py_sitescriptdir}/reportlab/tools/pythonpoint
-%{py_sitescriptdir}/reportlab/tools/pythonpoint/*.py[co]
-%{py_sitescriptdir}/reportlab/tools/pythonpoint/README
-%{py_sitescriptdir}/reportlab/tools/pythonpoint/*.dtd
-%dir %{py_sitescriptdir}/reportlab/tools/pythonpoint/styles
-%{py_sitescriptdir}/reportlab/tools/pythonpoint/styles/*.py[co]
+%attr(755,root,root) %{py_sitedir}/_renderPM.so
+%attr(755,root,root) %{py_sitedir}/_rl_accel.so
+%attr(755,root,root) %{py_sitedir}/pyHnj.so
+%attr(755,root,root) %{py_sitedir}/sgmlop.so
+%dir %{py_sitedir}/reportlab
+%{py_sitedir}/reportlab-%{version}-py*.egg-info
+%{py_sitedir}/reportlab/*.py[co]
+%dir %{py_sitedir}/reportlab/fonts
+%{py_sitedir}/reportlab/fonts/*.afm
+%{py_sitedir}/reportlab/fonts/*.pfb
+%{py_sitedir}/reportlab/fonts/*.sfd
+%{py_sitedir}/reportlab/fonts/*.ttf
+%{py_sitedir}/reportlab/fonts/*.txt
+%dir %{py_sitedir}/reportlab/graphics
+%{py_sitedir}/reportlab/graphics/*.py[co]
+%dir %{py_sitedir}/reportlab/graphics/charts
+%{py_sitedir}/reportlab/graphics/charts/*.py[co]
+%dir %{py_sitedir}/reportlab/graphics/barcode
+%{py_sitedir}/reportlab/graphics/barcode/*.py[co]
+%dir %{py_sitedir}/reportlab/graphics/widgets
+%{py_sitedir}/reportlab/graphics/widgets/*.py[co]
+%dir %{py_sitedir}/reportlab/lib
+%{py_sitedir}/reportlab/lib/*.py[co]
+%{py_sitedir}/reportlab/lib/*.mashed
+%dir %{py_sitedir}/reportlab/pdfbase
+%{py_sitedir}/reportlab/pdfbase/*.py[co]
+%dir %{py_sitedir}/reportlab/pdfgen
+%{py_sitedir}/reportlab/pdfgen/*.py[co]
+%dir %{py_sitedir}/reportlab/platypus
+%{py_sitedir}/reportlab/platypus/*.py[co]
 
 %files examples
 %defattr(644,root,root,755)
 %dir %{_examplesdir}/%{name}-%{version}
-%dir %{_examplesdir}/%{name}-%{version}/graphics-samples
-%{_examplesdir}/%{name}-%{version}/graphics-samples/*.py
 %{_examplesdir}/%{name}-%{version}/demos
 %{_examplesdir}/%{name}-%{version}/pythonpoint-demos
