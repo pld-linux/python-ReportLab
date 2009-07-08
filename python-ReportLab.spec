@@ -1,17 +1,20 @@
+# TODO:
+#  Check if docs/*.pdf is generated using _installed_ ReportLab
+#  so build may fail if ReportLab is not installed on builder
 %define		module	ReportLab
 %define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 Version:	2.3
-Release:	1
+Release:	2
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.org/ftp/ReportLab_%{fversion}.tar.gz
 # Source0-md5:	057b846bd3b7b2c3498bf14f6a523632
 Patch0:		%{name}-setup.patch
 URL:		http://www.reportlab.org/
-BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python-devel >= 1:2.4
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python
@@ -89,14 +92,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.txt docs/*.pdf LICENSE.txt
+%doc README.txt LICENSE.txt docs/*.pdf
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{py_sitedir}/_renderPM.so
 %attr(755,root,root) %{py_sitedir}/_rl_accel.so
 %attr(755,root,root) %{py_sitedir}/pyHnj.so
 %attr(755,root,root) %{py_sitedir}/sgmlop.so
 %dir %{py_sitedir}/reportlab
+%if "%{py_ver}" > "2.4"
 %{py_sitedir}/reportlab-%{version}-py*.egg-info
+%endif
 %{py_sitedir}/reportlab/*.py[co]
 %dir %{py_sitedir}/reportlab/fonts
 %{py_sitedir}/reportlab/fonts/*.afm
