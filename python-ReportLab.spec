@@ -65,7 +65,7 @@ Przykłady do biblioteki ReportLab.
 CFLAGS="%{rpmcflags}"; export CFLAGS
 python setup.py build
 cd docs
-PYTHONPATH=../src python genAll.py
+PYTHONPATH=$(pwd)/../src python genAll.py
 cd ..
 
 %install
