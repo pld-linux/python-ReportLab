@@ -1,6 +1,8 @@
 # TODO:
-#  Check if docs/*.pdf is generated using _installed_ ReportLab
-#  so build may fail if ReportLab is not installed on builder
+# - use system fonts:
+#   /usr/lib/python2.7/site-packages/reportlab/fonts/VeraBI.ttf
+# - Check if docs/*.pdf is generated using _installed_ ReportLab
+#   so build may fail if ReportLab is not installed on builder
 %bcond_without	doc
 #
 %define		module	ReportLab
@@ -9,7 +11,7 @@ Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 Version:	2.4
-Release:	3
+Release:	4
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.org/ftp/ReportLab_%{fversion}.tar.gz
@@ -103,6 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/_rl_accel.so
 %attr(755,root,root) %{py_sitedir}/pyHnj.so
 %attr(755,root,root) %{py_sitedir}/sgmlop.so
+%dir %{py_sitescriptdir}/reportlab
 %dir %{py_sitedir}/reportlab
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/reportlab-%{version}-py*.egg-info
