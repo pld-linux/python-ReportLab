@@ -84,6 +84,8 @@ python setup.py install \
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}-%{version}}
 install tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
 
+install -d $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab
+
 cp -a demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a tools/pythonpoint/demos $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}/pythonpoint-demos
 
