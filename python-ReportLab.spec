@@ -28,6 +28,7 @@ URL:		http://www.reportlab.org/
 BuildRequires:	python-devel >= 1:2.4
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	unzip
 %pyrequires_eq	python
 Requires:	python-PIL
 Obsoletes:	ReportLab
