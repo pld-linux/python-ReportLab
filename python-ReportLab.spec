@@ -1,21 +1,27 @@
+#
+# Conditional build:
+%bcond_without	doc
+
 # TODO:
 # - use system fonts:
 #   /usr/lib/python2.7/site-packages/reportlab/fonts/VeraBI.ttf
 # - Check if docs/*.pdf is generated using _installed_ ReportLab
 #   so build may fail if ReportLab is not installed on builder
-%bcond_without	doc
-#
+# - Standard T1 font curves (source1) maybe should be packaged in other package?
+
 %define		module	ReportLab
 %define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 Version:	2.4
-Release:	5
+Release:	6
 License:	distributable
 Group:		Libraries/Python
 Source0:	http://www.reportlab.org/ftp/ReportLab_%{fversion}.tar.gz
 # Source0-md5:	e6dc4b0fbfb6814f7777e5960774cb5d
+Source1:	http://www.reportlab.com/ftp/fonts/pfbfer.zip
+# Source1-md5:	9042d7091298313c9a8d87e1a30ac2c5
 Patch0:		%{name}-setup.patch
 URL:		http://www.reportlab.org/
 %{?with_doc:BuildRequires:	python-PIL}
@@ -66,23 +72,26 @@ Przykłady do biblioteki ReportLab.
 %prep
 %setup -q -n ReportLab_%{fversion}
 
+%{__unzip} -qq -d src/reportlab/fonts %{SOURCE1}
+
 %build
-CFLAGS="%{rpmcflags}"; export CFLAGS
-python setup.py build
+CC="%{__cc}" \
+CFLAGS="%{rpmcflags}" \
+%{__python} setup.py build
 %if %{with doc}
 cd docs
-PYTHONPATH=$(pwd)/../src python genAll.py
+PYTHONPATH=$(pwd)/../src %{__python} genAll.py
 cd ..
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python setup.py install \
+%{__python} setup.py install \
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}-%{version}}
-install tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
+install -p tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT%{py_sitescriptdir}/reportlab
 
@@ -102,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.txt LICENSE.txt %{?with_doc:docs/*.pdf}
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/pythonpoint.py
 %attr(755,root,root) %{py_sitedir}/_renderPM.so
 %attr(755,root,root) %{py_sitedir}/_rl_accel.so
 %attr(755,root,root) %{py_sitedir}/pyHnj.so
