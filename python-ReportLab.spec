@@ -10,18 +10,17 @@
 # - Standard T1 font curves (source1) maybe should be packaged in other package?
 
 %define		module	ReportLab
-%define		fversion	%(echo %{version} |tr . _)
 Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	2.4
-Release:	6
+Version:	2.5
+Release:	1
 License:	distributable
 Group:		Libraries/Python
-Source0:	http://www.reportlab.org/ftp/ReportLab_%{fversion}.tar.gz
-# Source0-md5:	e6dc4b0fbfb6814f7777e5960774cb5d
+Source0:	http://www.reportlab.org/ftp/reportlab-%{version}.tar.gz
+# Source0-md5:	cdf8b87a6cf1501de1b0a8d341a217d3
 Source1:	http://www.reportlab.com/ftp/fonts/pfbfer.zip
-# Source1-md5:	9042d7091298313c9a8d87e1a30ac2c5
+# Source1-md5:	35d20e26490cb2a8646fab6276ac6a4c
 Patch0:		%{name}-setup.patch
 URL:		http://www.reportlab.org/
 %{?with_doc:BuildRequires:	python-PIL}
@@ -71,7 +70,7 @@ Examples for ReportLab.
 Przykłady do biblioteki ReportLab.
 
 %prep
-%setup -q -n ReportLab_%{fversion}
+%setup -q -n reportlab-%{version}
 
 %{__unzip} -qq -d src/reportlab/fonts %{SOURCE1}
 
