@@ -56,15 +56,14 @@ od platformy PDF-ów oraz grafik.
 - Generowanie PDF: używa Pythona, przejrzystego języka obiektowego o
   warstwowej architekturze
 - Grafika: podstawowe figury geometryczne, kontrolki, a także
-  przykłady, włączając w to wykresy i diagramy
-- PythonPoing: narzędzie do generowania slajdów w formacie PDF z
+  przykłady, w tym wykresy i diagramy
+- PythonPoint: narzędzie do generowania slajdów w formacie PDF z
   prostego formatu XML
 
 %package examples
 Summary:	Examples for ReportLab
 Summary(pl.UTF-8):	Przykłady do biblioteki ReportLab
 Group:		Libraries/Python
-%pyrequires_eq	python
 Requires:	%{name} = %{version}-%{release}
 
 %description examples
