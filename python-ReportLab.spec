@@ -78,9 +78,7 @@ Przykłady do biblioteki ReportLab.
 %{__unzip} -qq -d src/reportlab/fonts %{SOURCE1}
 
 %build
-CC="%{__cc}" \
-CFLAGS="%{rpmcflags}" \
-%{__python} setup.py build
+%py_build
 %if %{with doc}
 cd docs
 PYTHONPATH=$(pwd)/../src %{__python} genAll.py
@@ -89,9 +87,7 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install \
-	--root=$RPM_BUILD_ROOT \
-	--optimize=2
+%py_install
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_examplesdir}/%{name}-%{version}}
 install -p tools/pythonpoint/pythonpoint.py $RPM_BUILD_ROOT%{_bindir}
