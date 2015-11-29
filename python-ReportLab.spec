@@ -30,7 +30,7 @@ BuildRequires:	libart_lgpl-devel >= 2
 %{?with_doc:BuildRequires:	python-PIL}
 BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	unzip
 Requires:	python >= 1:2.7
 Requires:	python-PIL
