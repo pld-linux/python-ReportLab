@@ -14,13 +14,13 @@
 Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	3.0
-Release:	4
+Version:	3.3.0
+Release:	1
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads
-Source0:	https://bitbucket.org/rptlab/reportlab/get/ReportLab_3_0.tar.bz2
-# Source0-md5:	2c902ed7f6bf029cd0946858f0b2c07e
+Source0:	https://pypi.python.org/packages/b8/17/7c5342dfbc9dc856173309270006e34c3bfad59934f0faa1dcc117ac93f1/reportlab-%{version}.tar.gz
+# Source0-md5:	8ad6181b69ec515d4f6d8bb894682d5d
 Source1:	http://www.reportlab.com/ftp/fonts/pfbfer.zip
 # Source1-md5:	35d20e26490cb2a8646fab6276ac6a4c
 Patch0:		%{name}-setup.patch
@@ -73,9 +73,14 @@ Examples for ReportLab.
 Przykłady do biblioteki ReportLab.
 
 %prep
-%setup -q -n rptlab-reportlab-6382a792db9e
+# %setup -q -n rptlab-reportlab-6382a792db9e
+%setup -q -n reportlab-%{version}
+
 
 %{__unzip} -qq -d src/reportlab/fonts %{SOURCE1}
+# Remove install_requires=['pillow>=2.4.0','pip>=1.4.1', 'setuptools>=2.2'],
+# which leads to bugus install requirements
+sed  -i.bak '/install_requires/d' setup.py
 
 %build
 %py_build
@@ -106,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.txt LICENSE.txt README.txt %{?with_doc:docs/reportlab-userguide.pdf}
+%doc CHANGES.md LICENSE.txt README.txt %{?with_doc:docs/reportlab-userguide.pdf}
 %attr(755,root,root) %{_bindir}/pythonpoint.py
 %dir %{py_sitescriptdir}/reportlab
 %dir %{py_sitedir}/reportlab
