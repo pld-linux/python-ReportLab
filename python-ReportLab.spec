@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	doc	# PDF documentation
+%bcond_with	doc	# PDF documentation
 
 # TODO:
 # - python3 (3.3+) package
@@ -14,13 +14,13 @@
 Summary:	Python library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	3.3.0
+Version:	2.7
 Release:	1
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads
-Source0:	https://pypi.python.org/packages/b8/17/7c5342dfbc9dc856173309270006e34c3bfad59934f0faa1dcc117ac93f1/reportlab-%{version}.tar.gz
-# Source0-md5:	8ad6181b69ec515d4f6d8bb894682d5d
+Source0:	https://pypi.python.org/packages/a1/2f/7bcba9b75143455aaddf90c46a0c53dca89e57a4e5c5760af8422aa6747c/reportlab-2.7.tar.gz
+# Source0-md5:	78300e6fe8a0d020fc16734a3de80cc4
 Source1:	http://www.reportlab.com/ftp/fonts/pfbfer.zip
 # Source1-md5:	35d20e26490cb2a8646fab6276ac6a4c
 Patch0:		%{name}-setup.patch
@@ -111,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.md LICENSE.txt README.txt %{?with_doc:docs/reportlab-userguide.pdf}
+%doc CHANGES.txt LICENSE.txt README.txt %{?with_doc:docs/reportlab-userguide.pdf}
 %attr(755,root,root) %{_bindir}/pythonpoint.py
 %dir %{py_sitescriptdir}/reportlab
 %dir %{py_sitedir}/reportlab
@@ -134,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/reportlab/fonts/sy______.pfb
 %{py_sitedir}/reportlab/fonts/z?______.pfb
 %dir %{py_sitedir}/reportlab/graphics
-%attr(755,root,root) %{py_sitedir}/reportlab/graphics/_renderPM.so
+%attr(755,root,root) %{py_sitedir}/_renderPM.so
 %{py_sitedir}/reportlab/graphics/*.py[co]
 %dir %{py_sitedir}/reportlab/graphics/barcode
 %{py_sitedir}/reportlab/graphics/barcode/*.py[co]
@@ -143,8 +143,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/reportlab/graphics/widgets
 %{py_sitedir}/reportlab/graphics/widgets/*.py[co]
 %dir %{py_sitedir}/reportlab/lib
-%attr(755,root,root) %{py_sitedir}/reportlab/lib/_rl_accel.so
-%attr(755,root,root) %{py_sitedir}/reportlab/lib/pyHnj.so
+%attr(755,root,root) %{py_sitedir}/_rl_accel.so
+%attr(755,root,root) %{py_sitedir}/pyHnj.so
+%attr(755,root,root) %{py_sitedir}/sgmlop.so
 %{py_sitedir}/reportlab/lib/*.py[co]
 %{py_sitedir}/reportlab/lib/hyphen.mashed
 %dir %{py_sitedir}/reportlab/pdfbase
