@@ -84,9 +84,7 @@ od platformy PDF-ów oraz grafik.
 Summary:	API documentation for ReportLab module
 Summary(pl.UTF_8):	Dokumentacja API modułu ReportLab
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for ReportLab module.
@@ -99,9 +97,7 @@ Summary:	Examples for ReportLab
 Summary(pl.UTF-8):	Przykłady do biblioteki ReportLab
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description examples
 Examples for ReportLab.
