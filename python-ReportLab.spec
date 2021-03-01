@@ -12,13 +12,13 @@
 Summary:	Python 2 library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona 2 do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	3.5.34
-Release:	2
+Version:	3.5.59
+Release:	1
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads/?tab=tags
 Source0:	https://files.pythonhosted.org/packages/source/r/reportlab/reportlab-%{version}.tar.gz
-# Source0-md5:	77d37a7f9f785b3666206de0fbc44aab
+# Source0-md5:	838741f007ba5f7bfd9dc7d4d4569438
 Patch0:		%{name}-setup.patch
 URL:		https://www.reportlab.com/dev/opensource/
 BuildRequires:	freetype-devel >= 2
