@@ -13,7 +13,7 @@ Summary:	Python 2 library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona 2 do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 Version:	3.5.59
-Release:	1
+Release:	2
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads/?tab=tags
