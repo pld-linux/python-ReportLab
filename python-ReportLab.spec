@@ -12,13 +12,13 @@
 Summary:	Python 2 library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona 2 do generowania PDF-ów oraz grafik
 Name:		python-%{module}
-Version:	3.5.59
-Release:	2
+Version:	3.5.68
+Release:	1
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads/?tab=tags
 Source0:	https://files.pythonhosted.org/packages/source/r/reportlab/reportlab-%{version}.tar.gz
-# Source0-md5:	838741f007ba5f7bfd9dc7d4d4569438
+# Source0-md5:	92f79d609974ae8d6c57d0e3187db297
 Patch0:		%{name}-setup.patch
 URL:		https://www.reportlab.com/dev/opensource/
 BuildRequires:	freetype-devel >= 2
@@ -29,17 +29,16 @@ BuildRequires:	python-setuptools
 %endif
 %{?with_doc:BuildRequires:	python-pillow >= 4.0.0}
 %if %{with python3}
-BuildRequires:	python3-devel >= 1:3.5
+BuildRequires:	python3-devel >= 1:3.6
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	unzip
 Requires:	python-modules >= 1:2.7
-Obsoletes:	ReportLab
-Obsoletes:	python-ReportLab-barcode
-Obsoletes:	python-ReportLab-renderPM
-Obsoletes:	python-ReportLab-rl_accel
+Obsoletes:	python-ReportLab-barcode < 1
+Obsoletes:	python-ReportLab-renderPM < 2
+Obsoletes:	python-ReportLab-rl_accel < 1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,7 +61,7 @@ od platformy PDF-ów oraz grafik.
 Summary:	Python 3 library for generating PDFs and graphics
 Summary(pl.UTF-8):	Moduły Pythona 3 do generowania PDF-ów oraz grafik
 Group:		Libraries/Python
-Requires:	python3-modules >= 1:3.5
+Requires:	python3-modules >= 1:3.6
 
 %description -n python3-%{module}
 A library written in Python that lets you generate platform
@@ -119,7 +118,8 @@ Przykłady do biblioteki ReportLab.
 
 %if %{with doc}
 cd docs
-PYTHONPATH=$(pwd)/../src %{__python} genAll.py
+PYTHONPATH=$(echo $(pwd)/../build-2/lib.*) \
+%{__python} genAll.py
 cd ..
 %endif
 
@@ -247,7 +247,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py3_sitedir}/reportlab/lib/_rl_accel.cpython-*.so
 %{py3_sitedir}/reportlab/lib/*.py
 %{py3_sitedir}/reportlab/lib/__pycache__
-%{py3_sitedir}/reportlab/lib/hyphen.mashed
 %dir %{py3_sitedir}/reportlab/pdfbase
 %{py3_sitedir}/reportlab/pdfbase/*.py
 %{py3_sitedir}/reportlab/pdfbase/__pycache__
