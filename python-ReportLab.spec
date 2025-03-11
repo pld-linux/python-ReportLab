@@ -14,7 +14,7 @@ Summary(pl.UTF-8):	Moduły Pythona 2 do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 # keep 3.5.x (or <=3.6.1?) here for python2 support
 Version:	3.5.68
-Release:	6
+Release:	7
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads/?tab=tags
