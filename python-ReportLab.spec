@@ -20,7 +20,6 @@ Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads/?tab=tags
 Source0:	https://files.pythonhosted.org/packages/source/r/reportlab/reportlab-%{version}.tar.gz
 # Source0-md5:	92f79d609974ae8d6c57d0e3187db297
-Patch0:		%{name}-setup.patch
 URL:		https://www.reportlab.com/dev/opensource/
 BuildRequires:	freetype-devel >= 2
 BuildRequires:	libart_lgpl-devel >= 2
