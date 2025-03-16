@@ -1,0 +1,11 @@
+--- reportlab-3.5.68/src/rl_addons/rl_accel/_rl_accel.c.orig	2021-01-17 18:34:07.000000000 +0100
++++ reportlab-3.5.68/src/rl_addons/rl_accel/_rl_accel.c	2025-03-16 19:53:51.392468007 +0100
+@@ -622,7 +622,7 @@ static PyObject *unicode2T1(PyObject *mo
+ 				*_o1 = NULL, *_o2 = NULL, *_o3 = NULL;
+ 	static char *argnames[] = {"utext","fonts",NULL};
+ 	PyObject	*encObj = NULL;
+-	char		*encStr;
++	const char	*encStr;
+ 	if (!PyArg_ParseTupleAndKeywords(args, kwds, "OO", argnames, &utext, &fonts)) return NULL;
+ 	Py_INCREF(utext);
+ 	Py_INCREF(fonts);
