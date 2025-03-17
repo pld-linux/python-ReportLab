@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	doc	# PDF documentation
 %bcond_without	python2 # CPython 2.x module
-%bcond_without	python3 # CPython 3.x module
+%bcond_with	python3 # CPython 3.x module (built from python3-reportlab.spec)
 
 # TODO:
 # - use system fonts (see files lists) or share fonts for both python versions
@@ -14,7 +14,7 @@ Summary(pl.UTF-8):	Moduły Pythona 2 do generowania PDF-ów oraz grafik
 Name:		python-%{module}
 # keep 3.5.x (or <=3.6.1?) here for python2 support
 Version:	3.5.68
-Release:	7
+Release:	8
 License:	BSD-like
 Group:		Libraries/Python
 #Source0Download: https://bitbucket.org/rptlab/reportlab/downloads/?tab=tags
